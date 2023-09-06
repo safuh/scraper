@@ -85,7 +85,7 @@ def get_driver_options(ip,port):
     return options
 def firefoxdriver(prxy):
     proxy=set_sel_prxy(prxy)
-    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox'))
+    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
     ##service = FirefoxService()
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)

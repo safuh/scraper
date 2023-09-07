@@ -270,7 +270,7 @@ def with_ua():
     options.add_argument(f'--user-agent={agents}')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver'),firefox_binary=binary)
+    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install())
     return driver
     
 def bilaproxy():

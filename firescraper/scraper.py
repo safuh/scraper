@@ -260,7 +260,7 @@ def start_main_loop(prxy_flag):
         #koyeb_url_thread.start()
 
 def with_ua():
-    binary = FirefoxBinary(os.path.join(BASE_DIR,'Mozilla Firefox\\firefox.exe'))
+    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox'))
     options = firefox_options()
     options.add_argument('--dsiable-blink-features=AutomationControlled')
     options.add_argument('--disable-popup-blocking')
@@ -277,7 +277,7 @@ def with_ua():
     return driver
     
 def bilaproxy():
-    binary = FirefoxBinary(os.path.join(BASE_DIR,'Mozilla Firefox\\firefox.exe'))
+    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
     options = firefox_options()
     options.add_argument('--dsiable-blink-features=AutomationControlled')
     options.add_argument('--disable-popup-blocking')

@@ -90,7 +90,7 @@ def firefoxdriver(prxy):
     service = FirefoxService(GeckoDriverManager().install())
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
-    driver = FirefoxDriver(options=options,service=service,proxy=prxy)
+    driver = FirefoxDriver(options=options,service=service,firefox_binary=binary,proxy=prxy)
     return driver
 def click(driver,div):
     global click_count
@@ -295,14 +295,14 @@ def no_proxy_scrape(url):
         #driver.set_window_size(340,695)
         start_scraping(driver,url)
     except Exception as e:
-        print('Proxy timeout limits:'+str(e))
+        print('No proxy error:'+str(e))
 def ua_scrape(url):
     try:
         driver=with_ua()
         driver.set_window_size(340,695)
         start_scraping(driver,url)
     except Exception as e:
-        print('Proxy timeout limits:'+str(e))
+        print('ua error:'+str(e))
 
 if __name__ == "__main__":
     start_main_loop(True)

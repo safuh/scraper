@@ -8,6 +8,3 @@ chmod +x geckodriver
 export PATH=$PATH:geckodriver
 chmod +x firefox-esr
 export PATH=$PATH:firefox-esr
-chmod +x firefox
-export PATH=$PATH:firefox
-

@@ -90,7 +90,7 @@ def firefoxdriver(prxy):
     service = FirefoxService(GeckoDriverManager().install())
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
-    driver = FirefoxDriver(options=options,service=service,firefox_binary=binary,proxy=prxy)
+    driver = FirefoxDriver(options=options,service=service,proxy=prxy)
     return driver
 def click(driver,div):
     global click_count
@@ -244,15 +244,12 @@ def start_main_loop(prxy_flag):
     if prxy_flag :
         while click_count <= count_break:
             print(f"loop counter :{click_count}")
-            url_thread = threading.Thread(target=no_proxy_scrape,args=(url,))
-            ua_thread = threading.Thread(target=ua_scrape,args=(url,))
-            url_thread.start()
-            ua_thread.start()
+            no_proxy_scrape(url)
+            ua_scrape(url)
     else:
         while click_count <= count_break:
             print(f"loop counter :{click_count}")
-            ua_thread = threading.Thread(target=ua_scrape,args=(url,))
-            ua_thread.start()
+            ua_scrape(url)
             launchScraper(url)
         #url_thread = threading.Thread(target=launchScraper,args=(url,click_count))
         #koyeb_url_thread = threading.Thread(target=launchScraper,args=(koyeb_url,click_count))
@@ -260,7 +257,7 @@ def start_main_loop(prxy_flag):
         #koyeb_url_thread.start()
 
 def with_ua():
-    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox'))
+    binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
     options = firefox_options()
     options.add_argument('--dsiable-blink-features=AutomationControlled')
     options.add_argument('--disable-popup-blocking')
@@ -287,7 +284,7 @@ def bilaproxy():
     options.add_argument('--disable-dev-shm-usage')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver'),firefox_binary=binary)
+    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install(),firefox_binary=binary)
     return driver
 def no_proxy_scrape(url):
     try:

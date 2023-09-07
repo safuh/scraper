@@ -24,6 +24,7 @@ from random import randrange, randint
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+g_path=GeckoDriverManager().install()
 def get_ua_agents():
     with open(os.path.join(BASE_DIR,'user-agents.txt')) as f:
         ua_texts=f.read()
@@ -85,9 +86,10 @@ def get_driver_options(ip,port):
     options.profile = create_driver_profile(agents,ip,port)
     return options
 def firefoxdriver(prxy):
+    global g_path
     proxy=set_sel_prxy(prxy)
     binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
-    service = FirefoxService(GeckoDriverManager().install())
+    service = FirefoxService(g_path)
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
     driver = FirefoxDriver(options=options,service=service,proxy=prxy)
@@ -257,6 +259,7 @@ def start_main_loop(prxy_flag):
         #koyeb_url_thread.start()
 
 def with_ua():
+    global g_path
     binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
     options = firefox_options()
     options.add_argument('--dsiable-blink-features=AutomationControlled')
@@ -270,10 +273,11 @@ def with_ua():
     options.add_argument(f'--user-agent={agents}')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install())
+    driver = FirefoxDriver(options=options,executable_path=g_path)
     return driver
     
 def bilaproxy():
+    global g_path
     binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
     options = firefox_options()
     options.add_argument('--dsiable-blink-features=AutomationControlled')
@@ -284,7 +288,7 @@ def bilaproxy():
     options.add_argument('--disable-dev-shm-usage')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install(),firefox_binary=binary)
+    driver = FirefoxDriver(options=options,executable_path=g_path,firefox_binary=binary)
     return driver
 def no_proxy_scrape(url):
     try:

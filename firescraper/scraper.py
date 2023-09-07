@@ -87,10 +87,10 @@ def get_driver_options(ip,port):
 def firefoxdriver(prxy):
     proxy=set_sel_prxy(prxy)
     binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
-    ##service = FirefoxService(GeckoDriverManager().install())
+    service = FirefoxService(GeckoDriverManager().install())
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
-    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install(),proxy=prxy)
+    driver = FirefoxDriver(options=options,service=service,proxy=prxy)
     return driver
 def click(driver,div):
     global click_count

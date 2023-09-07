@@ -8,4 +8,3 @@ chmod +x geckodriver
 export PATH=$PATH:geckodriver
 chmod +x firefox-esr
 export PATH=$PATH:firefox-esr
-export GH_TOKEN = "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"

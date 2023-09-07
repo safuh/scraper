@@ -87,7 +87,7 @@ def get_driver_options(ip,port):
 def firefoxdriver(prxy):
     proxy=set_sel_prxy(prxy)
     binary = FirefoxBinary(os.path.join(BASE_DIR,'firefox-esr'))
-    ##service = FirefoxService()
+    ##service = FirefoxService(GeckoDriverManager().install())
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
     driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install(),proxy=prxy)
@@ -273,7 +273,7 @@ def with_ua():
     options.add_argument(f'--user-agent={agents}')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver.exe'),firefox_binary=binary)
+    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver'),firefox_binary=binary)
     return driver
     
 def bilaproxy():
@@ -287,7 +287,7 @@ def bilaproxy():
     options.add_argument('--disable-dev-shm-usage')
     options.headless=True
     #service = FirefoxService()
-    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver.exe'),firefox_binary=binary)
+    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver'),firefox_binary=binary)
     return driver
 def no_proxy_scrape(url):
     try:

@@ -4,3 +4,4 @@ whitenoise
 gunicorn
 selenium == 4.4.3
 requests
+webdriver-manager

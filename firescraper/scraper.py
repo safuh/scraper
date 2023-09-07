@@ -15,6 +15,7 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.proxy import*
 from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.firefox import GeckoDriverManager
 import requests
 import json
 import os
@@ -89,7 +90,7 @@ def firefoxdriver(prxy):
     ##service = FirefoxService()
     ip,port=prxy.split(':')
     options=get_driver_options(ip,port)
-    driver = FirefoxDriver(options=options,executable_path=os.path.join(BASE_DIR,'geckodriver.exe'),firefox_binary=binary,proxy=prxy)
+    driver = FirefoxDriver(options=options,executable_path=GeckoDriverManager().install(),firefox_binary=binary,proxy=prxy)
     return driver
 def click(driver,div):
     global click_count
